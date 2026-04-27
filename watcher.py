@@ -8,11 +8,11 @@ from urllib.request import urlretrieve
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - \
         %(message)s', level=logging.INFO)
-api = Ultimaker3("192.168.1.119", "application")
+api = Ultimaker3(environ["ULTIMAKER_IP"], "application")
 api.loadAuth("/home/henrik/bin/ultimaker/auth.data")
 
 def downloadSnapshot():
-    url = "http://192.168.1.119:8080/?action=snapshot"
+    url = "http://{}:8080/?action=snapshot".format(environ["ULTIMAKER_IP"])
     urlretrieve(url, "/tmp/snapshot.jpg")
 
 
@@ -38,7 +38,7 @@ def status(bot, update):
     logging.info(job_progress)
     update.message.reply_text(reply)
     logging.info(job_started)
-    bot.send_photo(chat_id="-1001196544036", photo=open("/tmp/snapshot.jpg",\
+    bot.send_photo(chat_id=environ["ULTIMAKER_CHATID"], photo=open("/tmp/snapshot.jpg",\
             'rb'))
 
 bot = telegram.Bot(environ["ULTIMAKER_BOT_TOKEN"])

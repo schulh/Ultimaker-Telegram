@@ -83,6 +83,9 @@ celerybeat-schedule
 # dotenv
 .env
 
+# Ultimaker auth credentials
+auth.data
+
 # virtualenv
 .venv
 venv/

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 from ultimaker import Ultimaker3
+from os import environ
 import sys
 from time import sleep
 
-api = Ultimaker3("192.168.1.119", "heasdas")
+api = Ultimaker3(environ["ULTIMAKER_IP"], "heasdas")
 api.loadAuth("/home/henrik/bin/ultimaker/auth.data")
 
 def changeColor(b, s, h):
